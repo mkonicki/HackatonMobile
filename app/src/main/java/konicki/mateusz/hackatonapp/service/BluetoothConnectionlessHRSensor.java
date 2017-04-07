@@ -32,7 +32,6 @@ public class BluetoothConnectionlessHRSensor {
         RSSI = scanResult.getRSSI();
         uuiDs = getUUIDsInfo(scanResult.getAdditionalData());
         manufacturerSpecific = getADManufacturerSpecific(scanResult.getAdditionalData());
-
     }
 
     public String getID() {
