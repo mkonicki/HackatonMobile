@@ -15,30 +15,44 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:text="Nazwa:"
             android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="aaaaaaa!"
-            android:textSize="30sp" />
+            android:text="Turbo Szatan 5000"
+            android:textSize="30sp"
+            android:layout_weight="0.08" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="vvvvvv!"
+            android:text="Opis:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="139dp"
+            android:text="Najlepsza atrakcja w tej częsci galaktyki; przeciążenia rzędu 666G; wyparowanie mózgu gwarantowane"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cena:"
             android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="eeeeee!"
+            android:text="15 EUR"
             android:textSize="30sp" />
     </LinearLayout>
 
