@@ -5,8 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.database.DatabaseOpenHelper;
 
+import konicki.mateusz.hackatonapp.model.Beacon;
 import konicki.mateusz.hackatonapp.model.DaoMaster;
 import konicki.mateusz.hackatonapp.model.DaoSession;
+import konicki.mateusz.hackatonapp.model.Place;
 
 /**
  * Created by Mateusz on 11.02.2017.

@@ -26,11 +26,15 @@ public class BeaconSensor {
     private UUIDs uuiDs;
     private BluetoothDevice device;
     private int RSSI;
+    private final double PAYABLE = 98;
+    private final double VISIBLE = 50;
 
     private ADManufacturerSpecific manufacturerSpecific;
     private Beacon beacon;
+    private boolean wasPaid = false;
+    private boolean wasVisible;
 
-    public BeaconSensor(BluetoothScanResult scanResult) {
+    BeaconSensor(BluetoothScanResult scanResult) {
         device = scanResult.getDevice();
         RSSI = scanResult.getRSSI();
         uuiDs = getUUIDsInfo(scanResult.getAdditionalData());
@@ -72,11 +76,17 @@ public class BeaconSensor {
         return null;
     }
 
-    public int getRSSI() {
+    private int getRSSI() {
         return RSSI;
     }
 
+    public boolean isPayable() {
+        return !wasPaid && queality() >= PAYABLE;
+    }
+
+
     public void update(BeaconSensor beaconSensor) {
+
         RSSI = beaconSensor.getRSSI();
     }
 
@@ -84,7 +94,37 @@ public class BeaconSensor {
         return beacon;
     }
 
+    public double queality() {
+        double dBm = RSSI;
+        if (dBm < -100) {
+            dBm = -100;
+        } else if (dBm > -50) {
+            dBm = -50;
+        }
+        return 2.0 * (dBm + 100.0);
+    }
+
+
     public void setBeacon(Beacon beacon) {
         this.beacon = beacon;
+    }
+
+    public void pay() {
+        this.wasPaid = true;
+    }
+
+    public boolean isVisible() {
+        return !wasVisible && queality() > VISIBLE;
+    }
+
+
+    public boolean wasPaidForEntrance() {
+        return wasPaid;
+    }
+
+    public void saw() {
+        wasVisible = true;
+        if (queality() < 10)
+            wasPaid = false;
     }
 }
