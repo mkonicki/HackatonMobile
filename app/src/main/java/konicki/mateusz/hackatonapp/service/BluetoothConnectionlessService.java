@@ -12,7 +12,7 @@ import android.support.annotation.RequiresApi;
  */
 public class BluetoothConnectionlessService extends BluetoothService {
 
-    private final int TIMESTAMP = 1200;
+    private final int TIMESTAMP = 3000;
     private ScanCallback scanCallback;
     private Runnable runnable;
     private Handler callback;
@@ -25,7 +25,7 @@ public class BluetoothConnectionlessService extends BluetoothService {
             startScanCallback();
             callback.postDelayed(runnable, TIMESTAMP);
         };
-        scanCallback = new BluetoothScanCallback(this);
+        scanCallback = new BluetoothScanCallback();
     }
 
     @Override

@@ -30,13 +30,7 @@ public class Place {
 
     @ToMany(referencedJoinProperty = "placeId")
     private List<Beacon> beacons;
-    @ToMany
-    @JoinEntity(
-            entity = HistoricalPaymentPlace.class,
-            targetProperty = "placeId",
-            sourceProperty = "historicalPaymentId"
-    )
-    private List<HistoracialPayment> payments;
+
 
     /**
      * Used to resolve relations
@@ -138,32 +132,6 @@ public class Place {
      * To-many relationship, resolved on first access (and after reset).
      * Changes to to-many relations are not persisted, make changes to the target entity.
      */
-    @Generated(hash = 2063857831)
-    public List<HistoracialPayment> getPayments() {
-        if (payments == null) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            HistoracialPaymentDao targetDao = daoSession.getHistoracialPaymentDao();
-            List<HistoracialPayment> paymentsNew = targetDao
-                    ._queryPlace_Payments(id);
-            synchronized (this) {
-                if (payments == null) {
-                    payments = paymentsNew;
-                }
-            }
-        }
-        return payments;
-    }
-
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
-    @Generated(hash = 1083720232)
-    public synchronized void resetPayments() {
-        payments = null;
-    }
 
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
