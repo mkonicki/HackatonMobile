@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100px"
+    android:padding="6px"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/place_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:textSize="18sp"
+        android:layout_weight="50"/>
+
+    <TextView
+        android:id="@+id/place_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:textSize="18sp"
+        android:layout_weight="50"/>
+
+</LinearLayout>
+
