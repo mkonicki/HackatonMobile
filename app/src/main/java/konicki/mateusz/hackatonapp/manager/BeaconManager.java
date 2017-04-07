@@ -45,9 +45,10 @@ public class BeaconManager {
         if (beacon == null)
             return;
         beaconSensor.setBeacon(beacon);
-        if ( isBeaconOnList(beaconSensor)!= null) {
-            BeaconSensor  sensor = isBeaconOnList(beaconSensor);
+        if (isBeaconOnList(beaconSensor) != null) {
+            BeaconSensor sensor = isBeaconOnList(beaconSensor);
             sensor.update(beaconSensor);
+            handleBeaconBehavior(sensor);
             return;
         }
         beacons.add(beaconSensor);
@@ -58,14 +59,17 @@ public class BeaconManager {
 
     private void handleBeaconBehavior(BeaconSensor beaconSensor) {
         Log.e("as", String.valueOf(beaconSensor.queality()));
-        if (beaconSensor.isPayable()) {
+        if (beaconSensor.isPayable()) {https://github.com/mkonicki/HackatonMobile/invitations
             beaconSensor.pay();
+            updateBeaconData(beaconSensor);
             EventBus.getDefault().post(new PaymentEvent(beaconSensor.getBeacon()));
+
             return;
         }
 
         if (beaconSensor.isVisible()) {
             beaconSensor.saw();
+            updateBeaconData(beaconSensor);
             EventBus.getDefault().post(new BeaconAddedEvent(beaconSensor));
         }
     }
@@ -76,5 +80,14 @@ public class BeaconManager {
                 return beacon;
         }
         return null;
+    }
+
+    private void updateBeaconData(BeaconSensor sensor){
+        for (BeaconSensor beacon : beacons) {
+            if (beacon.getMac().equals(sensor.getMac())) {
+                beacons.remove(beacon);
+                beacons.add(sensor);
+            }
+        }
     }
 }
