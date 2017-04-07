@@ -44,8 +44,8 @@ public class BluetoothConnectionlessService extends BluetoothService {
     private void startScanCallback() {
         if (BLEScanner == null)
             return;
-        ScanFilter filter = new ScanFilter.Builder().setServiceUuid(new ParcelUuid(UUID.fromString("0000180f-0000-1000-8000-00805f9b34fb"))).build();
-        filters.add(filter);
+//        ScanFilter filter = new ScanFilter.Builder().setServiceUuid(new ParcelUuid(UUID.fromString("0000180f-0000-1000-8000-00805f9b34fb"))).build();
+//        filters.add(filter);
         BLEScanner.startScan(filters, settings, scanCallback);
     }
 

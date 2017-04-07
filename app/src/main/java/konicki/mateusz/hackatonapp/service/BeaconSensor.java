@@ -127,4 +127,13 @@ public class BeaconSensor {
         if (queality() < 10)
             wasPaid = false;
     }
+
+    public boolean shouldHideBeacon() {
+        return queality() < VISIBLE;
+    }
+
+    public void hide() {
+        wasVisible = false;
+        wasPaid = false;
+    }
 }

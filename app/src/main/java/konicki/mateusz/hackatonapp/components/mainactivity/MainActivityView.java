@@ -13,6 +13,7 @@ import konicki.mateusz.hackatonapp.base.BaseView;
 import konicki.mateusz.hackatonapp.base.IBaseViewModel;
 import konicki.mateusz.hackatonapp.database.dbhelper.DBHelper;
 import konicki.mateusz.hackatonapp.manager.BeaconAddedEvent;
+import konicki.mateusz.hackatonapp.manager.BeaconRemoveEvent;
 import konicki.mateusz.hackatonapp.model.Place;
 
 /**
@@ -42,13 +43,9 @@ public class MainActivityView extends BaseView {
 
     @Subscribe
     public void BeaconAddedEvent(BeaconAddedEvent event) {
-
-
         synchronized (this) {
             view.drawBeaconOnMap(event.getBeaconSensor().getBeacon());
         }
-
-
     }
 
 }

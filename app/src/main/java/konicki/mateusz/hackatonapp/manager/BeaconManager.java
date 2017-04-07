@@ -23,7 +23,7 @@ public class BeaconManager {
 
     private BeaconRepository beaconRepository;
     private List<BeaconSensor> beacons;
-
+    private BeaconSensor beaconSensor;
     public static BeaconManager instance;
 
     private BeaconManager(Context context) {
@@ -58,20 +58,24 @@ public class BeaconManager {
     }
 
     private void handleBeaconBehavior(BeaconSensor beaconSensor) {
-        Log.e("as", String.valueOf(beaconSensor.queality()));
         if (beaconSensor.isPayable()) {
             beaconSensor.pay();
             updateBeaconData(beaconSensor);
             EventBus.getDefault().post(new PaymentEvent(beaconSensor.getBeacon()));
-
+            return;
+        }
+        if(this.beaconSensor != null && this.beaconSensor.getMac().equals(beaconSensor.getMac())){
+            this.beaconSensor = beaconSensor;
+        }
+        if (this.beaconSensor != null && this.beaconSensor.queality() > beaconSensor.queality()) {
             return;
         }
 
-        if (beaconSensor.isVisible()) {
-            beaconSensor.saw();
-            updateBeaconData(beaconSensor);
-            EventBus.getDefault().post(new BeaconAddedEvent(beaconSensor));
-        }
+
+        beaconSensor.saw();
+        updateBeaconData(beaconSensor);
+        this.beaconSensor = beaconSensor;
+        EventBus.getDefault().post(new BeaconAddedEvent(beaconSensor));
     }
 
     private BeaconSensor isBeaconOnList(BeaconSensor beaconSensor) {
@@ -82,7 +86,7 @@ public class BeaconManager {
         return null;
     }
 
-    private void updateBeaconData(BeaconSensor sensor){
+    private void updateBeaconData(BeaconSensor sensor) {
         for (BeaconSensor beacon : beacons) {
             if (beacon.getMac().equals(sensor.getMac())) {
                 beacons.remove(beacon);

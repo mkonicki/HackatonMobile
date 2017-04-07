@@ -186,12 +186,27 @@ public class Beacon {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Beacon beacon = (Beacon) o;
+
+        return id.equals(beacon.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1978483639)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getBeaconDao() : null;
     }
-
-
 }
