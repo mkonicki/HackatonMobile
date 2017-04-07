@@ -14,7 +14,6 @@ public class BluetoothConnectionlessService extends BluetoothService {
 
     private final int TIMESTAMP = 1200;
     private ScanCallback scanCallback;
-    private BluetoothAdapter.LeScanCallback BLEScanCallback;
     private Runnable runnable;
     private Handler callback;
 
@@ -26,11 +25,7 @@ public class BluetoothConnectionlessService extends BluetoothService {
             startScanCallback();
             callback.postDelayed(runnable, TIMESTAMP);
         };
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            BLEScanCallback = new BluetoothLeScanCallback(true);
-        } else {
-            scanCallback = new BluetoothScanCallback(true);
-        }
+        scanCallback = new BluetoothScanCallback(this);
     }
 
     @Override
@@ -42,15 +37,10 @@ public class BluetoothConnectionlessService extends BluetoothService {
         return result;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void startScanCallback() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            bluetoothAdapter.startLeScan(BLEScanCallback);
-        } else {
-            if (BLEScanner == null)
-                return;
-            BLEScanner.startScan(filters, settings, scanCallback);
-        }
+        if (BLEScanner == null)
+            return;
+        BLEScanner.startScan(filters, settings, scanCallback);
     }
 
     protected void startScan() {
@@ -61,9 +51,7 @@ public class BluetoothConnectionlessService extends BluetoothService {
 
     protected void stopScan() {
         callback.removeCallbacks(runnable);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            bluetoothAdapter.stopLeScan(BLEScanCallback);
-        } else if (BLEScanner != null && scanCallback != null) {
+        if (BLEScanner != null && scanCallback != null) {
             BLEScanner.stopScan(scanCallback);
         }
         isScanning = false;

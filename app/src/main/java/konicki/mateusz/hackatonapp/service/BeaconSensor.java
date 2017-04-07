@@ -15,60 +15,35 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import konicki.mateusz.hackatonapp.model.Beacon;
+
 /**
  * Created by Mateusz on 07.04.2017.
  */
 
-public class BluetoothConnectionlessHRSensor {
+public class BeaconSensor {
 
     private UUIDs uuiDs;
     private BluetoothDevice device;
     private int RSSI;
 
     private ADManufacturerSpecific manufacturerSpecific;
+    private Beacon beacon;
 
-    public BluetoothConnectionlessHRSensor(BluetoothScanResult scanResult) {
+    public BeaconSensor(BluetoothScanResult scanResult) {
         device = scanResult.getDevice();
         RSSI = scanResult.getRSSI();
         uuiDs = getUUIDsInfo(scanResult.getAdditionalData());
         manufacturerSpecific = getADManufacturerSpecific(scanResult.getAdditionalData());
     }
 
-    public String getID() {
+    public String getMac() {
         return device.getAddress();
     }
 
 
     public String getName() {
         return device.getName();
-    }
-
-    public void initDeviceInfo() {
-        EventBus.getDefault().register(this);
-    }
-
-    public boolean isHeartRateDevice() {
-
-        for (UUID uuid : uuiDs.getUUIDs()) {
-            Log.e("uuid",uuid.toString());
-        }
-        return false;
-    }
-
-    @SuppressWarnings("unused")
-    @Subscribe
-    public void onScanResult(BluetoothScanResult result) {
-        if (result.getDevice().getAddress().equals(device.getAddress()))
-            handleScanResult(result);
-    }
-
-
-    private void handleScanResult(BluetoothScanResult result) {
-        RSSI = result.getRSSI();
-
-        ADManufacturerSpecific adManufacturerSpecific = getADManufacturerSpecific(result.getAdditionalData());
-        if (adManufacturerSpecific == null)
-            return;
     }
 
     private ADManufacturerSpecific getADManufacturerSpecific(byte[] bytes) {
@@ -97,4 +72,19 @@ public class BluetoothConnectionlessHRSensor {
         return null;
     }
 
+    public int getRSSI() {
+        return RSSI;
+    }
+
+    public void update(BeaconSensor beaconSensor) {
+        RSSI = beaconSensor.getRSSI();
+    }
+
+    public Beacon getBeacon() {
+        return beacon;
+    }
+
+    public void setBeacon(Beacon beacon) {
+        this.beacon = beacon;
+    }
 }

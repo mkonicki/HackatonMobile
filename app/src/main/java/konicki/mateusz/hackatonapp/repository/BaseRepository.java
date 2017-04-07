@@ -12,7 +12,7 @@ import konicki.mateusz.hackatonapp.model.Place;
  * Created by Mateusz on 13.02.2017.
  */
 //
-public abstract class BaseRepository<Entity, DAO extends AbstractDao<Place, Long>>{
+public abstract class BaseRepository<Entity, DAO extends AbstractDao<Entity, Long>>{
 
     protected IDBHelper idbHelper;
 
