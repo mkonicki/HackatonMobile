@@ -26,6 +26,15 @@
         <service android:name=".service.BluetoothConnectionlessService" />
         <service android:name=".paymentservice.PaymentService" />
 
+        <activity
+            android:name=".places.PlaceDetailActivity"
+            android:label="@string/title_place_detail"
+            android:parentActivityName=".places.PlaceListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="konicki.mateusz.hackatonapp.places.PlaceListActivity" />
+        </activity>
     </application>
 
 </manifest>
