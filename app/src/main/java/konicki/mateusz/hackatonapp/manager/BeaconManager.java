@@ -59,7 +59,7 @@ public class BeaconManager {
 
     private void handleBeaconBehavior(BeaconSensor beaconSensor) {
         Log.e("as", String.valueOf(beaconSensor.queality()));
-        if (beaconSensor.isPayable()) {https://github.com/mkonicki/HackatonMobile/invitations
+        if (beaconSensor.isPayable()) {
             beaconSensor.pay();
             updateBeaconData(beaconSensor);
             EventBus.getDefault().post(new PaymentEvent(beaconSensor.getBeacon()));

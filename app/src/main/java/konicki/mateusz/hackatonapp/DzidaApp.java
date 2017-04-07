@@ -24,14 +24,16 @@ public class DzidaApp extends Application {
         Intent payment = new Intent(this, PaymentService.class);
         this.startService(payment);
         DBHelper dbHelper = new DBHelper(this);
-        Beacon beacon = new Beacon();
-        beacon.setMac("7C:2F:80:8E:9F:00");
-        Place place = new Place();
-        place.setName("Chuj");
-        place.setPayment(3.21d);
-        dbHelper.getSession().insert(place);
-        beacon.setPlaceId(place.getId());
-        dbHelper.getSession().insert(beacon);
+//        Beacon beacon = new Beacon();
+//        beacon.setMac("7C:2F:80:8E:9F:00");
+//        beacon.setX(0.35f);
+//        beacon.setY(0.17f);
+//        Place place = new Place();
+//        place.setName("Chuj");
+//        place.setPayment(3.21d);
+//        dbHelper.getSession().insert(place);
+//        beacon.setPlaceId(place.getId());
+//        dbHelper.getSession().insert(beacon);
     }
 
 }

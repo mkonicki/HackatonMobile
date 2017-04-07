@@ -34,16 +34,6 @@ public class MainActivityViewModel extends BaseViewModel {
         eventBus.register(this);
     }
 
-    @Subscribe
-    public void BeaconAddedEvent(BeaconAddedEvent event) {
-        AlertDialogHelper alertDialogHelper = new AlertDialogHelper();
-        Place place = dbhelper.getSession().getPlaceDao().load(event.getBeaconSensor().getBeacon().getPlaceId());
-
-        AlertDialog dialog = alertDialogHelper.createAlertDialog(context,
-                "wyryto miejsce " + place.getName()
-                , "Musisz zabólić " + place.getPayment());
-        dialog.show();
-    }
 
     @Subscribe
     public void BeaconPaidEvent(PaymentEvent event) {

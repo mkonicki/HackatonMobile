@@ -32,7 +32,7 @@ public class BeaconSensor {
     private ADManufacturerSpecific manufacturerSpecific;
     private Beacon beacon;
     private boolean wasPaid = false;
-    private boolean wasVisible;
+    private boolean wasVisible = false;
 
     BeaconSensor(BluetoothScanResult scanResult) {
         device = scanResult.getDevice();

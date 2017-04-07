@@ -18,6 +18,10 @@ public class Beacon {
     @Unique
     private String mac;
 
+    private float x;
+
+    private float y;
+
 
     private Long placeId;
 
@@ -25,25 +29,32 @@ public class Beacon {
     @ToOne(joinProperty = "placeId")
     private Place place;
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1190523493)
     private transient BeaconDao myDao;
 
 
-    @Generated(hash = 798105789)
-    public Beacon(Long id, String mac, Long placeId) {
-        this.id = id;
-        this.mac = mac;
-        this.placeId = placeId;
-    }
-
 
     @Generated(hash = 1143354403)
     public Beacon() {
+    }
+
+
+    @Generated(hash = 1541419538)
+    public Beacon(Long id, String mac, float x, float y, Long placeId) {
+        this.id = id;
+        this.mac = mac;
+        this.x = x;
+        this.y = y;
+        this.placeId = placeId;
     }
 
 
@@ -81,7 +92,9 @@ public class Beacon {
     private transient Long place__resolvedKey;
 
 
-    /** To-one relationship, resolved on first access. */
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 887950062)
     public Place getPlace() {
         Long __key = this.placeId;
@@ -101,7 +114,9 @@ public class Beacon {
     }
 
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 974283990)
     public void setPlace(Place place) {
         synchronized (this) {
@@ -148,6 +163,26 @@ public class Beacon {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+
+    public float getX() {
+        return this.x;
+    }
+
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+
+    public float getY() {
+        return this.y;
+    }
+
+
+    public void setY(float y) {
+        this.y = y;
     }
 
 
