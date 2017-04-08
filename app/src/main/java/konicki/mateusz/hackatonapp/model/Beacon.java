@@ -22,7 +22,8 @@ public class Beacon {
 
     private float y;
 
-
+    private int mapId;
+    
     private Long placeId;
 
 
@@ -42,18 +43,18 @@ public class Beacon {
     private transient BeaconDao myDao;
 
 
-
     @Generated(hash = 1143354403)
     public Beacon() {
     }
 
 
-    @Generated(hash = 1541419538)
-    public Beacon(Long id, String mac, float x, float y, Long placeId) {
+    @Generated(hash = 397310227)
+    public Beacon(Long id, String mac, float x, float y, int mapId, Long placeId) {
         this.id = id;
         this.mac = mac;
         this.x = x;
         this.y = y;
+        this.mapId = mapId;
         this.placeId = placeId;
     }
 
@@ -200,6 +201,16 @@ public class Beacon {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+
+    public int getMapId() {
+        return this.mapId;
+    }
+
+
+    public void setMapId(int mapId) {
+        this.mapId = mapId;
     }
 
 

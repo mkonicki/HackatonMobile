@@ -64,14 +64,12 @@ public class BeaconManager {
             EventBus.getDefault().post(new PaymentEvent(beaconSensor.getBeacon()));
             return;
         }
-        if(this.beaconSensor != null && this.beaconSensor.getMac().equals(beaconSensor.getMac())){
+        if (this.beaconSensor != null && this.beaconSensor.getMac().equals(beaconSensor.getMac())) {
             this.beaconSensor = beaconSensor;
         }
         if (this.beaconSensor != null && this.beaconSensor.queality() > beaconSensor.queality()) {
             return;
         }
-
-
         beaconSensor.saw();
         updateBeaconData(beaconSensor);
         this.beaconSensor = beaconSensor;
@@ -89,8 +87,8 @@ public class BeaconManager {
     private void updateBeaconData(BeaconSensor sensor) {
         for (BeaconSensor beacon : beacons) {
             if (beacon.getMac().equals(sensor.getMac())) {
-                beacons.remove(beacon);
-                beacons.add(sensor);
+                int index = beacons.indexOf(beacon);
+                beacons.set(index, sensor);
             }
         }
     }

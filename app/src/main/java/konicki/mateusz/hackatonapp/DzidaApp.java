@@ -23,24 +23,30 @@ public class DzidaApp extends Application {
         this.startService(intent);
         Intent payment = new Intent(this, PaymentService.class);
         this.startService(payment);
-//        DBHelper dbHelper = new DBHelper(this);
-//        Beacon beacon = new Beacon();
-//        beacon.setMac("7C:2F:80:8E:9F:00");
-//        beacon.setX(0.35f);
-//        beacon.setY(0.17f);
-//        Place place = new Place();
-//        place.setName("Chuj");
-//        place.setPayment(3.21d);
-//        dbHelper.getSession().insert(place);
-//        beacon.setPlaceId(place.getId());
-//        dbHelper.getSession().insert(beacon);
-//
-//        Beacon beacon2 = new Beacon();
-//        beacon2.setMac("55:FC:90:66:59:DF");
-//        beacon2.setX(0.58f);
-//        beacon2.setY(0.5f);
-//
-//        dbHelper.getSession().insert(beacon2);
+        DBHelper dbHelper = new DBHelper(this);
+        Beacon beacon = new Beacon();
+        beacon.setMac("7C:2F:80:8E:9F:00");
+        beacon.setX(0.35f);
+        beacon.setY(0.17f);
+        beacon.setMapId(11);
+        Place place = new Place();
+        place.setName("Chuj");
+        place.setPayment(3.21d);
+        dbHelper.getSession().insert(place);
+        beacon.setPlaceId(place.getId());
+        dbHelper.getSession().insert(beacon);
+
+        Beacon beacon2 = new Beacon();
+        beacon2.setMac("55:FC:90:66:59:DF");
+        beacon2.setX(0.58f);
+        beacon2.setY(0.5f);
+        beacon2.setMapId(16);
+        Place place2 = new Place();
+        place2.setName("wewewadad");
+        place2.setPayment(3.21d);
+        dbHelper.getSession().insert(place2);
+        beacon2.setPlaceId(place2.getId());
+        dbHelper.getSession().insert(beacon2);
 
     }
 

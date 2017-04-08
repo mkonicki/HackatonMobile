@@ -2,6 +2,7 @@ package konicki.mateusz.hackatonapp.components.mainactivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.widget.ListView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -23,7 +24,8 @@ import konicki.mateusz.hackatonapp.model.Place;
 public class MainActivityView extends BaseView {
 
     private PlaceView view;
-
+    private MainActivityAdapter activityAdapter;
+    private ListView listView;
     public MainActivityView() {
         super(R.layout.activity_main);
     }
@@ -32,7 +34,11 @@ public class MainActivityView extends BaseView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        activityAdapter = new MainActivityAdapter(this, new DBHelper(this).getSession().getBeaconDao().loadAll());
         view = (PlaceView) findViewById(R.id.view);
+        listView = (ListView) findViewById(R.id.list_beacons);
+        listView.setAdapter(activityAdapter);
         EventBus.getDefault().register(this);
     }
 
