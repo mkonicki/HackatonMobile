@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import konicki.mateusz.hackatonapp.R;
 import konicki.mateusz.hackatonapp.database.dbhelper.DBHelper;
+import konicki.mateusz.hackatonapp.model.Beacon;
 
 public class Summary extends AppCompatActivity {
 
@@ -23,8 +25,15 @@ public class Summary extends AppCompatActivity {
         setContentView(R.layout.activity_summary);
 
         final ListView listview = (ListView) findViewById(R.id.summary_view);
-
-        final SummaryListAdapter adapter = new SummaryListAdapter(this, new DBHelper(this).getSession().getBeaconDao().loadAll());
+        List<Beacon> beaconList = new DBHelper(this).getSession().getBeaconDao().loadAll();
+        final SummaryListAdapter adapter = new SummaryListAdapter(this, beaconList);
         listview.setAdapter(adapter);
+
+        TextView textView = (TextView) findViewById(R.id.summary_price);
+        double summed_price = 0;
+        for(Beacon bcn: beaconList){
+            summed_price += bcn.getPlace().getPayment();
+        }
+        textView.setText(String.valueOf(summed_price));
     }
 }
