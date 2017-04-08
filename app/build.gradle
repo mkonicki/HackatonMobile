@@ -79,6 +79,7 @@ dependencies {
     //core
     //core
 
+    compile 'com.android.support:support-v4:25.1.1'
     compile 'com.android.support:appcompat-v7:25.1.1'
     compile 'com.android.support:design:25.1.1'
     compile 'net.danlew:android.joda:2.9.3.1'
@@ -93,6 +94,5 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'org.greenrobot:greendao:3.2.0'
-    compile 'com.android.support:support-v4:25.1.1'
     testCompile 'junit:junit:4.12'
 }
