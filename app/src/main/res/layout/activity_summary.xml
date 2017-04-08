@@ -16,14 +16,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Visited places:"
-            android:textSize="18sp"
-            android:layout_weight="0.06" />
+            android:textSize="18sp" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/summary_view">
+            android:id="@+id/summary_view"
+            android:layout_weight="2">
         </ListView>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="100px"
+            android:padding="6px"
+            android:weightSum="100">
+
+            <TextView
+                android:id="@+id/place_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:text="Sum: "
+                android:textSize="26sp"
+                android:padding="10sp"
+                android:layout_weight="50"/>
+
+            <TextView
+                android:id="@+id/summary_price"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:textSize="26sp"
+                android:layout_weight="50"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
