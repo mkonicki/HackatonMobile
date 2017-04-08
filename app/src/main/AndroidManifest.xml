@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".DzidaApp"
         android:allowBackup="true"
@@ -29,10 +30,12 @@
 
         <activity
             android:name=".places.PlaceDetailActivity"
-            android:label="@string/title_place_detail"
+            android:label=""
             android:parentActivityName=".places.PlaceDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".summary.Summary" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".summary.Summary">
+
+        </activity>
 
     </application>
 
