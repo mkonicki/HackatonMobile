@@ -35,7 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
-
                 app:srcCompat="@mipmap/diabelski_muyn" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
