@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import konicki.mateusz.hackatonapp.R;
 import konicki.mateusz.hackatonapp.database.dbhelper.DBHelper;
@@ -34,6 +35,6 @@ public class Summary extends AppCompatActivity {
         for(Beacon bcn: beaconList){
             summed_price += bcn.getPlace().getPayment();
         }
-        textView.setText(String.valueOf(summed_price));
+        textView.setText(String.format(Locale.getDefault(), "%.2f EUR", summed_price));
     }
 }
