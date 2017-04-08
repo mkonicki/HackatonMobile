@@ -31,22 +31,22 @@ public class DzidaApp extends Application {
         beacon.setMapId(11);
         Place place = new Place();
         place.setName("Chuj");
+        place.setDescription("scscscasadsadasdasdasdasdasdasdasdad");
+        place.setUrl("https://static.mgmresorts.com/content/dam/MGM/new-york-new-york/entertainment/attractions/the-roller-coaster-at-new-york-new-york/new-york-new-york-big-apple-coaster.tif.image.1440.720.high.jpg");
         place.setPayment(3.21d);
         dbHelper.getSession().insert(place);
         beacon.setPlaceId(place.getId());
         dbHelper.getSession().insert(beacon);
 
-        Beacon beacon2 = new Beacon();
-        beacon2.setMac("55:FC:90:66:59:DF");
-        beacon2.setX(0.58f);
-        beacon2.setY(0.5f);
-        beacon2.setMapId(16);
-        Place place2 = new Place();
-        place2.setName("wewewadad");
-        place2.setPayment(3.21d);
-        dbHelper.getSession().insert(place2);
-        beacon2.setPlaceId(place2.getId());
-        dbHelper.getSession().insert(beacon2);
+//        Beacon beacon2 = new Beacon();
+//        beacon2.setMac("55:FC:90:66:59:DF");
+//        beacon2.setX(0.58f);
+//        beacon2.setY(0.5f);
+//        beacon2.setMapId(16);
+//        Place place2 = new Place();
+//        place2.setName("wewewadad");
+//        place2.setPayment(3.21d);
+//        dbHelper.getSession().insert(place2);0
 
     }
 
