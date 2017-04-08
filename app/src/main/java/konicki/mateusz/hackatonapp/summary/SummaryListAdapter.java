@@ -53,7 +53,12 @@ public class SummaryListAdapter extends BaseAdapter {
         View view = mInflater.inflate(R.layout.summary_list_item, null);
 
         TextView textView = (TextView) view.findViewById(R.id.place_name);
-        textView.setText(String.format(Locale.getDefault(), "%s %.2f EUR", getItem(position).getPlace().getName(), getItem(position).getPlace().getPayment()));
+        textView.setText(String.format(Locale.getDefault(), "%s ", getItem(position).getPlace().getName()));
+        TextView textView2 = (TextView) view.findViewById(R.id.place_price);
+        textView2.setText(String.format(Locale.getDefault(), "%.2f EUR",getItem(position).getPlace().getPayment()));
+
+
+
         view.setOnClickListener(v -> {
             Intent intent = new Intent(context, PlaceDetailActivity.class);
             intent.putExtra("ID", getItem(position).getPlaceId());

@@ -33,7 +33,9 @@
             android:label=""
             android:parentActivityName=".places.PlaceDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".summary.Summary"></activity>
+        <activity android:name=".summary.Summary"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label=""/>
     </application>
 
 </manifest>
