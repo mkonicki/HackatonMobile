@@ -31,6 +31,9 @@ public class Place {
     @ToMany(referencedJoinProperty = "placeId")
     private List<Beacon> beacons;
 
+    @ToMany(referencedJoinProperty = "placeId")
+    private List<Queue> queues;
+
 
     /**
      * Used to resolve relations
@@ -167,6 +170,40 @@ public class Place {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+ 
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    @Generated(hash = 8134869)
+    public synchronized void resetQueues() {
+        queues = null;
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 597092803)
+    public List<Queue> getQueues() {
+        if (queues == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            QueueDao targetDao = daoSession.getQueueDao();
+            List<Queue> queuesNew = targetDao._queryPlace_Queues(id);
+            synchronized (this) {
+                if (queues == null) {
+                    queues = queuesNew;
+                }
+            }
+        }
+        return queues;
     }
 
     /** called by internal mechanisms, do not call yourself. */

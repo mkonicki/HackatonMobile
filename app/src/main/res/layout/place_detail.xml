@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nazwa:"
+            android:text="Name:"
             android:textSize="18sp" />
 
         <TextView
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Opis:"
+            android:text="Desctiprion:"
             android:textSize="18sp" />
 
         <TextView
@@ -43,12 +43,12 @@
             android:layout_height="139dp"
             android:text="Najlepsza atrakcja w tej częsci galaktyki; przeciążenia rzędu 666G; wyparowanie mózgu gwarantowane"
             android:id="@+id/description"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cena:"
+            android:text="Price:"
             android:textSize="18sp" />
 
         <TextView
@@ -56,7 +56,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/price"
             android:text="15 EUR"
-            android:textSize="30sp" />
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/queue"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </RelativeLayout>

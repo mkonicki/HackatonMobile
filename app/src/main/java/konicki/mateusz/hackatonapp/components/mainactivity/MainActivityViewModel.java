@@ -39,8 +39,8 @@ public class MainActivityViewModel extends BaseViewModel {
     public void BeaconPaidEvent(PaymentEvent event) {
         AlertDialogHelper alertDialogHelper = new AlertDialogHelper();
         AlertDialog dialog = alertDialogHelper.createAlertDialog(context,
-                "Zapłaciłeś za wjazd na  miejsce " + event.getBeacon().getPlace().getName()
-                , "Przejebałeś " + event.getBeacon().getPlace().getPayment());
+                "You paid for entrace to: " + event.getBeacon().getPlace().getName()
+                , "Cost " + event.getBeacon().getPlace().getPayment()+" Euro");
         dialog.show();
     }
 

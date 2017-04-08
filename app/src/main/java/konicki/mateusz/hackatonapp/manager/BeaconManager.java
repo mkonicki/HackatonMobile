@@ -11,6 +11,7 @@ import java.util.List;
 
 import konicki.mateusz.hackatonapp.events.PaymentEvent;
 import konicki.mateusz.hackatonapp.model.Beacon;
+import konicki.mateusz.hackatonapp.model.BeaconType;
 import konicki.mateusz.hackatonapp.repository.BeaconRepository;
 import konicki.mateusz.hackatonapp.service.BeaconSensor;
 
@@ -51,10 +52,11 @@ public class BeaconManager {
             handleBeaconBehavior(sensor);
             return;
         }
+        if (beacon.getType() == BeaconType.ENTRANCE) {
+            EventBus.getDefault().post(new EntranceEvent());
+        }
         beacons.add(beaconSensor);
-
         handleBeaconBehavior(beaconSensor);
-
     }
 
     private void handleBeaconBehavior(BeaconSensor beaconSensor) {

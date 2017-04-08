@@ -17,6 +17,7 @@
             android:name=".components.mainactivity.MainActivityView"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,9 +32,17 @@
         <activity
             android:name=".places.PlaceDetailActivity"
             android:label=""
+            android:screenOrientation="portrait"
+            android:parentActivityName=".places.PlaceDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EntranceView.EntranceView"
+            android:screenOrientation="portrait"
+            android:label=""
             android:parentActivityName=".places.PlaceDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".summary.Summary"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:label=""/>
     </application>

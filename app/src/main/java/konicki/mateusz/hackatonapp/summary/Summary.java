@@ -1,31 +1,34 @@
 package konicki.mateusz.hackatonapp.summary;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
+
+import konicki.mateusz.hackatonapp.EntranceView.EntranceView;
 import konicki.mateusz.hackatonapp.R;
-import konicki.mateusz.hackatonapp.base.BaseView;
-import konicki.mateusz.hackatonapp.base.IBaseViewModel;
+import konicki.mateusz.hackatonapp.base.AlertDialogHelper;
+import konicki.mateusz.hackatonapp.components.mainactivity.MainActivityView;
 import konicki.mateusz.hackatonapp.database.dbhelper.DBHelper;
-import konicki.mateusz.hackatonapp.model.Beacon;
+import konicki.mateusz.hackatonapp.model.Entrance;
+import konicki.mateusz.hackatonapp.model.HistoracialPayment;
+import konicki.mateusz.hackatonapp.model.HistoracialPaymentDao;
+import konicki.mateusz.hackatonapp.model.Place;
 
 public class Summary extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,20 +36,31 @@ public class Summary extends AppCompatActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
+        Long date = getIntent().getLongExtra("DATE", 0);
 
         final ListView listview = (ListView) findViewById(R.id.summary_view);
-        List<Beacon> beaconList = new DBHelper(this).getSession().getBeaconDao().loadAll();
+        List<HistoracialPayment> historacialPayments = new DBHelper(this).getSession().getHistoracialPaymentDao().queryBuilder().where(HistoracialPaymentDao.Properties.Date.ge(date)).list();
+
+
+        List<Place> beaconList = Stream.of(historacialPayments).map(payment -> payment.getPlace()).collect(Collectors.toList());
         final SummaryListAdapter adapter = new SummaryListAdapter(this, beaconList);
         listview.setAdapter(adapter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        TextView beginDate = (TextView) findViewById(R.id.begin_date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+        beginDate.setText("Begin date: " + dateFormat.format(historacialPayments.get(0).getDate()));
+
+
+        TextView endDate = (TextView) findViewById(R.id.end_date);
+        endDate.setText("End date: " + dateFormat.format(historacialPayments.get(historacialPayments.size()-1).getDate()));
         setSupportActionBar(toolbar);
         TextView textView = (TextView) findViewById(R.id.summary_price);
         double summed_price = 0;
-        for (Beacon bcn : beaconList) {
-            summed_price += bcn.getPlace().getPayment();
+        for (Place bcn : beaconList) {
+            summed_price += bcn.getPayment();
         }
-        textView.setText(String.valueOf(summed_price));
+        textView.setText(String.format(Locale.getDefault(), "%.2f EUR", summed_price));
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -66,30 +80,15 @@ public class Summary extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-
+            Intent intent = new Intent(this, MainActivityView.class);
+            this.startActivity(intent);
         } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent(this, Summary.class);
+            Intent intent = new Intent(this, EntranceView.class);
             this.startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

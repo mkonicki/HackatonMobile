@@ -11,6 +11,8 @@ import java.util.Date;
 import konicki.mateusz.hackatonapp.database.dbhelper.DBHelper;
 import konicki.mateusz.hackatonapp.database.dbhelper.IDBHelper;
 import konicki.mateusz.hackatonapp.events.PaymentEvent;
+import konicki.mateusz.hackatonapp.manager.EntranceEvent;
+import konicki.mateusz.hackatonapp.model.Entrance;
 import konicki.mateusz.hackatonapp.model.HistoracialPayment;
 import konicki.mateusz.hackatonapp.service.ViewServiceBase;
 import konicki.mateusz.hackatonapp.service.ViewServiceBinder;
@@ -52,5 +54,13 @@ public class PaymentService extends ViewServiceBase {
         payment.setPlaceId(event.getBeacon().getPlaceId());
         payment.setDate(now);
         idbHelper.getSession().insert(payment);
+    }
+
+    @Subscribe
+    public void onEnranceEvent(EntranceEvent event) {
+        Date now = new Date(System.currentTimeMillis());
+        Entrance entrance = new Entrance();
+        entrance.setEntranceDate(now);
+        idbHelper.getSession().insert(entrance);
     }
 }

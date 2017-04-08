@@ -15,6 +15,7 @@ import java.util.Locale;
 import konicki.mateusz.hackatonapp.R;
 import konicki.mateusz.hackatonapp.model.Beacon;
 import konicki.mateusz.hackatonapp.model.HistoracialPayment;
+import konicki.mateusz.hackatonapp.model.Place;
 import konicki.mateusz.hackatonapp.places.PlaceDetailActivity;
 
 /**
@@ -23,10 +24,10 @@ import konicki.mateusz.hackatonapp.places.PlaceDetailActivity;
 
 public class SummaryListAdapter extends BaseAdapter {
 
-    private List<Beacon> beaconList;
+    private List<Place> beaconList;
     private Context context;
 
-    public SummaryListAdapter(Context context, List<Beacon> beaconList) {
+    public SummaryListAdapter(Context context, List<Place> beaconList) {
         this.beaconList = beaconList;
         this.context = context;
     }
@@ -37,13 +38,13 @@ public class SummaryListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Beacon getItem(int position) {
+    public Place getItem(int position) {
         return beaconList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return beaconList.get(position).getMapId();
+        return beaconList.get(position).getId();
     }
 
     @Override
@@ -53,15 +54,15 @@ public class SummaryListAdapter extends BaseAdapter {
         View view = mInflater.inflate(R.layout.summary_list_item, null);
 
         TextView textView = (TextView) view.findViewById(R.id.place_name);
-        textView.setText(String.format(Locale.getDefault(), "%s ", getItem(position).getPlace().getName()));
+        textView.setText(String.format(Locale.getDefault(), "%s ", getItem(position).getName()));
         TextView textView2 = (TextView) view.findViewById(R.id.place_price);
-        textView2.setText(String.format(Locale.getDefault(), "%.2f EUR",getItem(position).getPlace().getPayment()));
+        textView2.setText(String.format(Locale.getDefault(), "%.2f EUR",getItem(position).getPayment()));
 
 
 
         view.setOnClickListener(v -> {
             Intent intent = new Intent(context, PlaceDetailActivity.class);
-            intent.putExtra("ID", getItem(position).getPlaceId());
+            intent.putExtra("ID", getItem(position).getId());
             context.startActivity(intent);
         });
         return view;

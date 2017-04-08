@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 import konicki.mateusz.hackatonapp.model.Beacon;
+import konicki.mateusz.hackatonapp.model.BeaconType;
 
 /**
  * Created by Mateusz on 07.04.2017.
@@ -81,7 +82,7 @@ public class BeaconSensor {
     }
 
     public boolean isPayable() {
-        return !wasPaid && queality() >= PAYABLE;
+        return !wasPaid && queality() >= PAYABLE && beacon.getType() == BeaconType.PAYMENT;
     }
 
 

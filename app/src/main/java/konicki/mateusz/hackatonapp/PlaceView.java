@@ -48,17 +48,19 @@ public class PlaceView extends View {
     private void drawPoint(Beacon beacon, Canvas canvas) {
         if (beacon == null)
             return;
-        Paint paint = generatePaint(Paint.Style.FILL, Color.RED, 80);
-        canvas.drawCircle(beacon.getX() * canvas.getWidth(), beacon.getY() * canvas.getHeight(), 12, paint);
+
+        Paint paint = generatePaint(Paint.Style.FILL, Color.BLUE, 80);
+        canvas.drawCircle(beacon.getX() * canvas.getWidth(), beacon.getY() * canvas.getHeight(), 17, paint);
+
+        Paint paint2 = generatePaint(Paint.Style.FILL, Color.RED, 80);
+        canvas.drawCircle(beacon.getX() * canvas.getWidth(), beacon.getY() * canvas.getHeight(), 12, paint2);
 
     }
 
     private Paint generatePaint(Paint.Style style, int color, int width) {
         Paint paint = new Paint();
         paint.setStyle(style);
-
         paint.setColor(color);
-        paint.setStrokeWidth(width);
         return paint;
     }
 

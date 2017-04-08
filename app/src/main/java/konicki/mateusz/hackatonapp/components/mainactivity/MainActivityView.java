@@ -15,16 +15,19 @@ import android.widget.ListView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import konicki.mateusz.hackatonapp.EntranceView.EntranceView;
 import konicki.mateusz.hackatonapp.PlaceView;
 import konicki.mateusz.hackatonapp.R;
 import konicki.mateusz.hackatonapp.base.BaseView;
 import konicki.mateusz.hackatonapp.base.IBaseViewModel;
 import konicki.mateusz.hackatonapp.database.dbhelper.DBHelper;
 import konicki.mateusz.hackatonapp.manager.BeaconAddedEvent;
+import konicki.mateusz.hackatonapp.model.BeaconDao;
 import konicki.mateusz.hackatonapp.places.PlaceDetailActivity;
 import konicki.mateusz.hackatonapp.summary.Summary;
 
 import android.support.v4.widget.DrawerLayout;
+
 import static konicki.mateusz.hackatonapp.R.id.toolbar;
 
 /**
@@ -46,7 +49,7 @@ public class MainActivityView extends BaseView implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        activityAdapter = new MainActivityAdapter(this, new DBHelper(this).getSession().getBeaconDao().loadAll());
+        activityAdapter = new MainActivityAdapter(this, new DBHelper(this).getSession().getBeaconDao().queryBuilder().orderAsc(BeaconDao.Properties.PlaceId).list());
         view = (PlaceView) findViewById(R.id.view);
         listView = (ListView) findViewById(R.id.list_beacons);
         listView.setAdapter(activityAdapter);
@@ -83,21 +86,6 @@ public class MainActivityView extends BaseView implements NavigationView.OnNavig
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -107,7 +95,7 @@ public class MainActivityView extends BaseView implements NavigationView.OnNavig
         if (id == R.id.nav_camera) {
 
         } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent(this, Summary.class);
+            Intent intent = new Intent(this, EntranceView.class);
             this.startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

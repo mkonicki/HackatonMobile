@@ -37,7 +37,6 @@ public class PlaceDetailActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.imageView2);
         Glide.with(imageView.getContext())
                 .load(place.getUrl())
-                .placeholder(R.mipmap.diabelski_muyn)
                 .into(imageView);
 
         if (savedInstanceState == null) {

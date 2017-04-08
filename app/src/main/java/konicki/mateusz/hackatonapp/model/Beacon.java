@@ -1,5 +1,6 @@
 package konicki.mateusz.hackatonapp.model;
 
+import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToOne;
@@ -26,6 +27,8 @@ public class Beacon {
     
     private Long placeId;
 
+    @Convert(converter = BeaconTypeConverter.class, columnType = Integer.class)
+    private BeaconType type;
 
     @ToOne(joinProperty = "placeId")
     private Place place;
@@ -48,14 +51,16 @@ public class Beacon {
     }
 
 
-    @Generated(hash = 397310227)
-    public Beacon(Long id, String mac, float x, float y, int mapId, Long placeId) {
+    @Generated(hash = 1750454099)
+    public Beacon(Long id, String mac, float x, float y, int mapId, Long placeId,
+            BeaconType type) {
         this.id = id;
         this.mac = mac;
         this.x = x;
         this.y = y;
         this.mapId = mapId;
         this.placeId = placeId;
+        this.type = type;
     }
 
 
@@ -211,6 +216,16 @@ public class Beacon {
 
     public void setMapId(int mapId) {
         this.mapId = mapId;
+    }
+
+
+    public BeaconType getType() {
+        return this.type;
+    }
+
+
+    public void setType(BeaconType type) {
+        this.type = type;
     }
 
 
