@@ -33,9 +33,6 @@ public class PlaceDetailActivity extends AppCompatActivity {
 
         long id = this.getIntent().getLongExtra("ID", 0);
         Place place = new DBHelper(this).getSession().getPlaceDao().load(id);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
         ImageView imageView = (ImageView) findViewById(R.id.imageView2);
         Glide.with(imageView.getContext())
                 .load(place.getUrl())
