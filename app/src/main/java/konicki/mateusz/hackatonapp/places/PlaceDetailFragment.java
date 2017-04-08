@@ -28,8 +28,6 @@ public class PlaceDetailFragment extends Fragment {
         Activity activity = this.getActivity();
         long id = activity.getIntent().getLongExtra("ID", 0);
         Place place = new DBHelper(activity).getSession().getPlaceDao().load(id);
-        TextView name = (TextView) rootView.findViewById(R.id.name);
-        name.setText(place.getName());
         TextView description = (TextView) rootView.findViewById(R.id.description);
         description.setText(place.getDescription());
         TextView price = (TextView) rootView.findViewById(R.id.price);

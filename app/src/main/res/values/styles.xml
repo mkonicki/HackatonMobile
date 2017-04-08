@@ -12,7 +12,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="dialogTheme" parent="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+
+    <style name="dialogTheme" parent="@style/Theme.AppCompat.Light.Dialog.Alert" />
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
